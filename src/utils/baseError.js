@@ -1,13 +1,10 @@
-const errors = {
-  NOT_FOUND: 404,
-};
+const { codes } = require('./statusCodes');
 
 const baseError = (code, message = '') => ({
-  code: errors[code],
+  code: codes[code],
   response: { message },
 });
 
 module.exports = {
-  errors,
   baseError,
 };

@@ -1,9 +1,10 @@
 const { productService } = require('../services');
 const { baseError } = require('../utils/baseError');
+const { codes } = require('../utils/statusCodes');
 
 const getAllProducts = async (_req, res) => {
   const products = await productService.getAllProducts();
-  res.status(200).json(products);
+  res.status(codes.OK).json(products);
 };
 
 const getProductsById = async (req, res) => {
@@ -13,7 +14,7 @@ const getProductsById = async (req, res) => {
     const error = baseError('NOT_FOUND', 'Product not found');
     return res.status(error.code).json(error.response);
   }
-  res.status(200).json(product);
+  res.status(codes.OK).json(product);
 };
 
 module.exports = {
