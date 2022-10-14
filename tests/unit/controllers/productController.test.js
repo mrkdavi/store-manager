@@ -13,7 +13,7 @@ const products = require("../mocks/products.mock");
 const { codes } = require("../../../src/utils/statusCodes");
 const { baseError } = require("../../../src/utils/baseError");
 
-describe("productController pass", () => {
+describe("[PASS] productController", () => {
   afterEach(() => sinon.restore());
 
   it("getAllProducts", async () => {
@@ -43,17 +43,38 @@ describe("productController pass", () => {
     sinon.stub(productService, "getProductsById").resolves(product);
 
     await productController.getProductsById(req, res);
-    expect(productService.getProductsById).to.have.been
-      .calledWith(+req.params.id);
+    expect(productService.getProductsById).to.have.been.calledWith(
+      +req.params.id
+    );
     expect(res.status).to.have.been.calledWith(codes.OK);
     expect(res.json).to.have.been.calledWith(product);
   });
+
+  it("createProduct", async () => {
+    const id = 1;
+
+    const req = {
+      body: products[id - 1],
+    };
+    const res = {};
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon.stub(productService, "createProduct").resolves(products[id - 1]);
+    await productController.createProduct(req, res);
+    expect(productService.createProduct).to.have.been.calledWith(
+      req.body
+    );
+    expect(res.status).to.have.been.calledWith(codes.CREATED);
+    expect(res.json).to.have.been.calledWith(req.body);
+  });
 });
 
-describe("productController fail", () => {
+describe("[FAIL] productController", () => {
   afterEach(() => sinon.restore());
 
-  it("getProductsById fail", async () => {
+  it("getProductsById", async () => {
     const req = {
       params: { id: '1' },
     };

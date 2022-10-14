@@ -22,4 +22,15 @@ describe("productService", () => {
     const result = await productService.getProductsById(id);
     expect(result).equal(products[id - 1]);
   });
+
+  it("createProduct", async () => {
+    const id = 3;
+
+    sinon.stub(productModel, "createProduct").resolves(id);
+    sinon.stub(productModel, "getProductsById").resolves(products[id - 1]);
+
+    const result = await productService.createProduct(products[id - 1].name);
+    expect(productModel.getProductsById).to.have.been.calledWith(id);
+    expect(result).equal(products[id - 1]);
+  });
 });
