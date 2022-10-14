@@ -8,12 +8,12 @@
     "method": "POST",
     "sortNum": 0,
     "created": "2022-10-14T03:10:40.701Z",
-    "modified": "2022-10-14T15:08:35.847Z",
+    "modified": "2022-10-14T16:16:54.868Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Arco tático\"\n}",
+      "raw": "{\n  \"name\": \"rifle\"\n}",
       "form": []
     },
     "tests": []
