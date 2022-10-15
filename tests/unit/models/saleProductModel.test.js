@@ -7,7 +7,7 @@ const saleProductModel = require("../../../src/models/saleProductModel");
 
 const sales = require("../mocks/sales.mock");
 
-describe('saleModel', () => {
+describe("saleProductModel", () => {
   afterEach(() => sinon.restore());
 
   it("getSaleById", async () => {
@@ -20,9 +20,9 @@ describe('saleModel', () => {
   });
 
   it("createSaleProduct", async () => {
-    sinon.stub(connection, "execute").resolves(
-      [{ affectedRows: sales.sales.length }]
-    );
+    sinon
+      .stub(connection, "query")
+      .resolves([{ affectedRows: sales.sales.length }]);
 
     const result = await saleProductModel.createSaleProduct(sales.sales);
     expect(result).equal(sales.sales.length);
