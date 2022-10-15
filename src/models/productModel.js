@@ -14,10 +14,10 @@ const getProductsById = async (id) => {
   const [result] = await connection.execute(
     `SELECT *
     FROM StoreManager.products
-    WHERE id = ?
-    ORDER BY id`,
+    WHERE id = ?`,
     [id],
   );
+
   return result[0];
 };
 
