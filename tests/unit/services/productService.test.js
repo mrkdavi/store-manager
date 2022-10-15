@@ -12,6 +12,7 @@ describe("productService", () => {
 
   it("getAllProducts", async () => {
     sinon.stub(productModel, "getAllProducts").resolves(products);
+
     const result = await productService.getAllProducts();
     expect(result).equal(products);
   });
@@ -19,6 +20,7 @@ describe("productService", () => {
   it("getProductsById", async () => {
     const id = 1;
     sinon.stub(productModel, "getProductsById").resolves(products[id - 1]);
+
     const result = await productService.getProductsById(id);
     expect(result).equal(products[id - 1]);
   });
