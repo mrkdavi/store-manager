@@ -24,10 +24,8 @@ describe("[PASS] saleService", () => {
 
     sinon
       .stub(productModel, "getProductsById")
-      .onCall(0)
-      .resolves(products[0])
-      .onCall(1)
-      .resolves(products[1]);
+      .onCall(0).resolves(products[0])
+      .onCall(1).resolves(products[1]);
     sinon.stub(saleModel, "createSale").resolves(saleId);
     sinon.stub(saleProductModel, "createSaleProduct").resolves();
     sinon.stub(saleProductModel, "getSaleById").resolves(sales.sales);

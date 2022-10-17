@@ -10,12 +10,19 @@ const sales = require("../mocks/sales.mock");
 describe("saleProductModel", () => {
   afterEach(() => sinon.restore());
 
-  it("getSaleById", async () => {
+  // it("getAllSaleProduct", async () => {
+  //   sinon.stub(connection, "execute").resolves([sales.salesSnakeCase]);
+
+  //   const result = await saleProductModel.getAllSaleProduct();
+  //   expect(result).to.deep.equal(sales.sales);
+  // });
+
+  it("getSaleProductById", async () => {
     const saleId = 3;
 
     sinon.stub(connection, "execute").resolves([sales.salesSnakeCase]);
 
-    const result = await saleProductModel.getSaleById(saleId);
+    const result = await saleProductModel.getSaleProductById(saleId);
     expect(result).to.deep.equal(sales.sales);
   });
 

@@ -18,6 +18,12 @@ const createSales = async (productsData) => {
   return formatSalesData(results);
 };
 
+const getAllSales = async () => saleProductModel.getAllSalesProducts();
+
+const getSaleProductById = async (saleId) => saleProductModel.getSaleProductById(saleId);
+
 module.exports = {
   createSales,
+  getAllSales,
+  getSaleProductById,
 };

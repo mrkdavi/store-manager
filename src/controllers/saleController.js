@@ -3,14 +3,31 @@ const { codes } = require('../utils/statusCodes');
 const { baseError } = require('../utils/baseError');
 
 const createSales = async (req, res) => {
-  const sales = await saleService.createSales(req.body);
-  if (!sales) {
+  const sale = await saleService.createSales(req.body);
+  if (!sale) {
     const error = baseError('NOT_FOUND', 'Product not found');
     return res.status(error.code).json(error.response);
   }
-  res.status(codes.CREATED).json(sales);
+  res.status(codes.CREATED).json(sale);
+};
+
+const getAllSales = async (req, res) => {
+  const sales = await saleService.getAllSales();
+  res.status(codes.OK).json(sales);
+};
+
+const getSaleById = async (req, res) => {
+  const { id } = req.params;
+  const product = await saleService.getSaleProductById(+id);
+  if (!product.length) {
+    const error = baseError('NOT_FOUND', 'Sale not found');
+    return res.status(error.code).json(error.response);
+  }
+  res.status(codes.OK).json(product);
 };
 
 module.exports = {
   createSales,
+  getAllSales,
+  getSaleById,
 };
