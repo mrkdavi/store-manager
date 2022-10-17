@@ -31,22 +31,26 @@ describe("[PASS] saleController", () => {
     expect(res.json).to.have.been.calledWith(sales.getAllSalesResponse);
   });
 
-  // it("getSaleById", async () => {
-  //   const req = {
-  //     params: { id: '1' },
-  //   };
-  //   const res = {};
+  it("getSaleById", async () => {
+    const req = {
+      params: { id: '1' },
+    };
+    const res = {};
 
-  //   res.status = sinon.stub().returns(res);
-  //   res.json = sinon.stub().returns();
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
 
-  //   sinon.stub(saleService, "getSaleById").resolves(sales.getSaleByIdResponse);
+    sinon
+      .stub(saleService, "getSaleProductById")
+      .resolves(sales.getSaleProductByIdResponse);
 
-  //   await saleController.getSaleById(req, res);
-  //   expect(saleService.getSaleById).to.have.been.calledWith(+req.params.id);
-  //   expect(res.status).to.have.been.calledWith(codes.OK);
-  //   expect(res.json).to.have.been.calledWith(sales.getSaleByIdResponse);
-  // });
+    await saleController.getSaleById(req, res);
+    expect(saleService.getSaleProductById).to.have.been.calledWith(
+      +req.params.id
+    );
+    expect(res.status).to.have.been.calledWith(codes.OK);
+    expect(res.json).to.have.been.calledWith(sales.getSaleProductByIdResponse);
+  });
 
   it("createProduct", async () => {
     const id = 1;
@@ -88,21 +92,25 @@ describe("[FAIL] productController", () => {
     expect(res.json).to.have.been.calledWith(error.response);
   });
 
-  // it("getSaleById", async () => {
-  //   const req = {
-  //     params: { id: "1" },
-  //   };
-  //   const res = {};
-  //   const error = baseError("NOT_FOUND", "Sale not found");
+  it("getSaleById", async () => {
+    const req = {
+      params: { id: "1" },
+    };
+    const res = {};
+    const error = baseError("NOT_FOUND", "Sale not found");
 
-  //   res.status = sinon.stub().returns(res);
-  //   res.json = sinon.stub().returns();
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
 
-  //   sinon.stub(saleService, "getSaleById").resolves();
+    sinon.stub(saleService, "getSaleProductById")
+      .resolves([]);
 
-  //   await saleController.getSaleById(req, res);
-  //   expect(saleService.getSaleById).to.have.been.calledWith(+req.params.id);
-  //   expect(res.status).to.have.been.calledWith(error.code);
-  //   expect(res.json).to.have.been.calledWith(error.response);
-  // });
+
+    await saleController.getSaleById(req, res);
+    expect(saleService.getSaleProductById).to.have.been.calledWith(
+      +req.params.id
+    );
+    expect(res.status).to.have.been.calledWith(error.code);
+    expect(res.json).to.have.been.calledWith(error.response);
+  });
 });

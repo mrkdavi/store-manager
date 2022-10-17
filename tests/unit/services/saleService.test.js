@@ -19,6 +19,23 @@ const sales = require("../mocks/sales.mock");
 describe("[PASS] saleService", () => {
   afterEach(() => sinon.restore());
 
+  it("getAllSales", async () => {
+    sinon.stub(saleProductModel, "getAllSalesProducts")
+      .resolves(sales.getAllSalesProductsResponse);
+
+
+    const result = await saleService.getAllSales();
+    expect(result).to.deep.equal(sales.getAllSalesProductsResponse);
+  });
+
+  it("getSaleProductById", async () => {
+    sinon.stub(saleProductModel, "getSaleProductById")
+      .resolves(sales.getSaleProductByIdResponse);
+
+    const result = await saleService.getSaleProductById();
+    expect(result).to.deep.equal(sales.getSaleProductByIdResponse);
+  });
+
   it("createSales", async () => {
     const saleId = 3;
 
