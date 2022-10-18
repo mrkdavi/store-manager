@@ -1,5 +1,5 @@
 const connection = require('../database/connection');
-const { columns, placeholders } = require('../utils/insertUtils');
+const { columns, placeholders, formattedColumns } = require('../utils/insertUtils');
 
 const getAllProducts = async () => {
   const [result] = await connection.execute(
@@ -31,8 +31,19 @@ const createProduct = async (productData) => {
   return insertId;
 };
 
+const updateProduct = async (id, productData) => {
+  const [{ affectedRows }] = await connection.execute(
+    `UPDATE StoreManager.products
+    SET ${formattedColumns(productData)}
+    WHERE id = ?`,
+    [...Object.values(productData), id],
+  );
+  return affectedRows;
+};
+
 module.exports = {
   getAllProducts,
   getProductsById,
   createProduct,
+  updateProduct,
 };

@@ -4,16 +4,16 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000/products/5",
-    "url": "http://localhost:3000/sales",
-    "method": "POST",
+    "url": "http://localhost:3000/products/22",
+    "method": "PUT",
     "sortNum": 0,
     "created": "2022-10-14T03:10:40.701Z",
-    "modified": "2022-10-15T14:28:39.839Z",
+    "modified": "2022-10-18T18:25:13.933Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 1\n  },\n  {\n    \"productId\": 2,\n    \"quantity\": 2\n  }\n]",
+      "raw": "{\n  \"name\": \"Mjölnir\"\n}",
       "form": []
     },
     "tests": []
